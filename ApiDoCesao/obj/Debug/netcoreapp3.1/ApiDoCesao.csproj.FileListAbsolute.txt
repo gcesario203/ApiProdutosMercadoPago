@@ -30,3 +30,7 @@ C:\uiui\ApiDoCesao\ApiDoCesao\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
 C:\uiui\ApiDoCesao\ApiDoCesao\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
 C:\uiui\ApiDoCesao\ApiDoCesao\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\uiui\ApiDoCesao\ApiDoCesao\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\uiui\ApiDoCesao\ApiDoCesao\bin\Debug\netcoreapp3.1\MercadoPago.dll
+C:\uiui\ApiDoCesao\ApiDoCesao\obj\Debug\netcoreapp3.1\ApiDoCesao.csproj.CoreCompileInputs.cache
+C:\uiui\ApiDoCesao\ApiDoCesao\obj\Debug\netcoreapp3.1\ApiDoCesao.MvcApplicationPartsAssemblyInfo.cs
+C:\uiui\ApiDoCesao\ApiDoCesao\obj\Debug\netcoreapp3.1\ApiDoCesao.MvcApplicationPartsAssemblyInfo.cache

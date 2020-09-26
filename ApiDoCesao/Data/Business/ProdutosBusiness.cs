@@ -20,7 +20,7 @@ namespace ApiDoCesao.Data.Business
         public void Salvar(ProdutoDto pProdutoDto)
         {
                 var collectionName = _produtosCollection.CollectionNamespace.CollectionName;
-                var lProdutoId = new SequenciasBusiness(_mongoDb).GetNextValue(collectionName);
+                var lProdutoId = new SequenciasBusiness(_mongoDb).ProximoValor(collectionName);
 
                 var lProduto = new Produtos
                 (

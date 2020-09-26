@@ -36,6 +36,10 @@ namespace ApiDoCesao.Data
 
             Utils.JsonMapClasses<Produtos>();
             Utils.JsonMapClasses<Sequencias>();
+            Utils.JsonMapClasses<Usuarios>();
+            Utils.JsonMapClasses<Enderecos>();
+            Utils.JsonMapClasses<Documentos>();
+            Utils.JsonMapClasses<Telefones>();
         }
     }
 }

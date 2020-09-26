@@ -16,7 +16,7 @@ namespace ApiDoCesao.Data.Business
             Padrao = 0;
         }
 
-        public int GetNextValue(string pCollectionName)
+        public int ProximoValor(string pCollectionName)
         {
 
             try

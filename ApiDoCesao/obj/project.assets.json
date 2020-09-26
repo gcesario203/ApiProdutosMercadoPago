@@ -11,7 +11,7 @@
           "lib/netstandard2.1/DnsClient.dll": {}
         }
       },
-      "mercadopago-sdk/1.0.57": {
+      "mercadopago-sdk/1.8.1": {
         "type": "package",
         "compile": {
           "lib/net35/MercadoPago.dll": {}
@@ -1418,15 +1418,16 @@
         "lib/netstandard2.1/DnsClient.xml"
       ]
     },
-    "mercadopago-sdk/1.0.57": {
-      "sha512": "89G+B8RVsFXhfgSiiG6HA1f2hujgYlyIu9dejXPv1rtdbu03Fqcfv3mU1mToJPXerPogoWtPXAng54r0GREiJg==",
+    "mercadopago-sdk/1.8.1": {
+      "sha512": "NvOAMx0p5QnghOdhGkfeRAjopgDAJrKEv8BaPGrXSv1jAeMyAbC/Gm3lznt2qVTEFvr9yryFnGKuDswLRsIk3g==",
       "type": "package",
-      "path": "mercadopago-sdk/1.0.57",
+      "path": "mercadopago-sdk/1.8.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/net35/MercadoPago.dll",
-        "mercadopago-sdk.1.0.57.nupkg.sha512",
+        "lib/net35/MercadoPago.pdb",
+        "mercadopago-sdk.1.8.1.nupkg.sha512",
         "mercadopago-sdk.nuspec"
       ]
     },
@@ -4919,7 +4920,7 @@
     ".NETCoreApp,Version=v3.1": [
       "MongoDB.Driver >= 2.11.2",
       "Swashbuckle.AspNetCore >= 5.6.3",
-      "mercadopago-sdk >= 1.0.57"
+      "mercadopago-sdk >= 1.8.1"
     ]
   },
   "packageFolders": {
@@ -4974,7 +4975,7 @@
           },
           "mercadopago-sdk": {
             "target": "Package",
-            "version": "[1.0.57, )"
+            "version": "[1.8.1, )"
           }
         },
         "imports": [
@@ -5004,7 +5005,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "O pacote 'mercadopago-sdk 1.0.57' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' em vez da estrutura de destino do projeto '.NETCoreApp,Version=v3.1'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
+      "message": "O pacote 'mercadopago-sdk 1.8.1' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' em vez da estrutura de destino do projeto '.NETCoreApp,Version=v3.1'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "mercadopago-sdk",
       "targetGraphs": [
         ".NETCoreApp,Version=v3.1"
