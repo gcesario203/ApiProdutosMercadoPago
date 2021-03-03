@@ -26,7 +26,8 @@ namespace ApiDoCesao.Data.Business
                 (
                     lProdutoId,
                     pProdutoDto.Nome,
-                    pProdutoDto.Preco
+                    pProdutoDto.Preco,
+                    pProdutoDto.Quantidade
                 );
 
                 _produtosCollection.InsertOne(lProduto);
@@ -54,7 +55,23 @@ namespace ApiDoCesao.Data.Business
                         .Set(prod => prod.ProdutoId, pId)
                         .Set(prod => prod.Nome, pProdutoDto.Nome)
                         .Set(prod => prod.Preco, pProdutoDto.Preco)
+                        .Set(prod => prod.Quantidade, pProdutoDto.Quantidade)
                     );
+        }
+
+        public void AlterarQuantidade(Produtos pProduto)
+        {
+            try
+            {
+                _produtosCollection.UpdateOne(
+                    Builders<Produtos>.Filter.Eq(prod => prod.ProdutoId, pProduto.ProdutoId),
+                    Builders<Produtos>.Update.Set(prod=>prod.Quantidade, pProduto.Quantidade)
+                    );
+            }
+            catch
+            {
+                throw new System.Exception("Não foi possível alterar a quantidade de produtos");
+            }
         }
 
         public void DeletarProduto(int pId)

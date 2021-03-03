@@ -1,4 +1,6 @@
-﻿using ApiDoCesao.Enums;
+﻿using ApiDoCesao.Data.Collections;
+using ApiDoCesao.Enums;
+using MercadoPago.DataStructures.Preference;
 using MongoDB.Bson.Serialization;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
@@ -68,7 +70,45 @@ namespace ApiDoCesao.General
 
         public static bool TelValido(string pArea, string pNumero)
         {
-            return (pArea.Length == 3 && pNumero.Length == 8) ? true : false;
+            return (pArea.Length == 2 && pNumero.Length == 8) ? true : false;
+        }
+
+        public static Payer MercadoPagoPagante(Usuarios pUsuario)
+        {
+            return new Payer()
+            {
+                Name = pUsuario.Nome,
+                Surname = pUsuario.Sobrenome,
+                Email = pUsuario.Email,
+                Phone = new Phone()
+                {
+                    AreaCode = pUsuario.Telefone.Area,
+                    Number = pUsuario.Telefone.Numero
+                },
+                Identification = new Identification()
+                {
+                    Type = pUsuario.Documento.Tipo.ToUpper(),
+                    Number = pUsuario.Documento.Numero
+                },
+                Address = new Address()
+                {
+                    StreetName = pUsuario.Endereco.Rua,
+                    StreetNumber = int.Parse(pUsuario.Endereco.Numero),
+                    ZipCode = pUsuario.Endereco.Cep
+                }
+            };
+        }
+
+
+        public static Item MercadoPagoProduto(Produtos pProduto)
+        {
+            return new Item()
+            {
+                Title = pProduto.Nome,
+                Quantity = pProduto.Quantidade,
+                CurrencyId = MercadoPago.Common.CurrencyId.BRL,
+                UnitPrice = (decimal)pProduto.Preco
+            };
         }
     }
 }

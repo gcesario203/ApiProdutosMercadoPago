@@ -10,12 +10,14 @@ namespace ApiDoCesao.Data.Collections
         public int ProdutoId { get; set; }
         public string Nome { get; set; }
         public double Preco { get; set; }
+        public int Quantidade { get; set; }
 
-        public Produtos(int pProdutoId,string pNome, double pPreco = 0.0)
+        public Produtos(int pProdutoId,string pNome, double pPreco, int pQuantidade)
         {
             ProdutoId = pProdutoId;
             Nome = pNome;
             Preco = pPreco;
+            Quantidade = pQuantidade;
         }
     }
 }

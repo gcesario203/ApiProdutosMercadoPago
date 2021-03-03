@@ -8,6 +8,7 @@ using ApiDoCesao.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MercadoPago;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApiDoCesao.Controllers
 {
@@ -24,7 +25,8 @@ namespace ApiDoCesao.Controllers
         }
 
         [HttpPost]
-        public IActionResult SalvarUsuario([FromBody] UsuarioDto pUsuarioDto)
+        [AllowAnonymous]
+        public IActionResult CriarUsuario([FromBody] UsuarioDto pUsuarioDto)
         {
             try 
             {
@@ -34,52 +36,73 @@ namespace ApiDoCesao.Controllers
             } 
             catch(Exception ex)
             {
-                return StatusCode(500, $"{ex}");
+                return StatusCode(500, $"{ex.Message}");
             }
         }
 
-        [HttpGet("{pId}")]
-        public IActionResult UsuarioPorId(int pId)
+        [HttpGet]
+        [Authorize]
+        [Route("/eu")]
+        public IActionResult UsuarioPorId()
         {
             try
             {
-                var usuario = _usuariosCollection.UsuarioPorId(pId);
+                var Email = User.Identity.Name;
+                var usuario = _usuariosCollection.UsuarioPorEmail(Email);
 
                 return Ok(usuario);
             }
             catch(Exception err)
             {
-                return StatusCode(404, $"{err}");
+                return StatusCode(404, $"{err.Message}");
             }
         }
 
-        [HttpDelete("{pId}")]
-        public IActionResult DeleteUsuario(int pId)
+        [HttpGet]
+        [Authorize(Roles ="admin")]
+        public IActionResult ListarUsuarios()
         {
             try
             {
-                 _usuariosCollection.DeletarUsuario(pId);
+                return Ok(_usuariosCollection.MostrarTodosUsuarios());
+            }
+            catch(Exception err)
+            {
+                return StatusCode(500, $"{err.Message}");
+            }
+        }
+
+        [HttpDelete]
+        [Authorize]
+        public IActionResult DeletarUsuario()
+        {
+            try
+            {
+                var user = _usuariosCollection.UsuarioPorEmail(User.Identity.Name);
+                 _usuariosCollection.DeletarUsuario(user.UsuarioId);
 
                 return Ok("usuario deletado com sucesso");
             }
             catch (Exception err)
             {
-                return StatusCode(404, $"{err}");
+                return StatusCode(404, $"{err.Message}");
             }
         }
 
-        [HttpPut("{pId}")]
-        public IActionResult UsuarioPorId(int pId, UsuarioDto pUsuarioDto)
+        [HttpPut]
+        [Authorize]
+        public IActionResult AlterarUsuario(UsuarioDto pUsuarioDto)
         {
             try
             {
-                _usuariosCollection.AlterarUsuario(pId, pUsuarioDto);
+                var user = _usuariosCollection.UsuarioPorEmail(User.Identity.Name);
+                _usuariosCollection.AlterarUsuario(user.UsuarioId, pUsuarioDto);
 
                 return Ok("Usuario editado com sucesso");
             }
             catch (Exception err)
             {
-                return StatusCode(404, $"{err}");
+                return StatusCode(404, $"{err.Message}");
             }
         }
     }

@@ -9,11 +9,11 @@ namespace ApiDoCesao.Data.Collections
     {
         public int EnderecoId { get; set; }
         public int UsuarioId { get; set; }
-        public int Numero { get; set; }
+        public string Numero { get; set; }
         public string Rua { get; set; }
         public string Cep { get; set; }
 
-        public Enderecos(int pNumero, string pRua, string pCep)
+        public Enderecos(string pNumero, string pRua, string pCep)
         {
             Numero = pNumero;
             Rua = pRua;

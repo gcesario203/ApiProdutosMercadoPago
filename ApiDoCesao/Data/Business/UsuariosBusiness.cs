@@ -30,65 +30,75 @@ namespace ApiDoCesao.Data.Business
 
         public void Salvar(UsuarioDto pUsuarioDto)
         {
-            if(pUsuarioDto.Senha == pUsuarioDto.SenhaConfirmacao)
+            var checarEmail = UsuarioPorEmail(pUsuarioDto.Login.Email);
+
+            if (checarEmail != null)
             {
-                if (Utils.SenhaValida(pUsuarioDto.Senha) && Utils.EmailValido(pUsuarioDto.Email))
+                throw new Exception("Email já cadastrado");
+            }
+            else
+            {
+                if (pUsuarioDto.Login.Senha == pUsuarioDto.SenhaConfirmacao)
                 {
-                    var lUsuario = new Usuarios
-                    (
-                        pUsuarioDto.Nome,
-                        pUsuarioDto.Sobrenome,
-                        pUsuarioDto.Email,
-                        pUsuarioDto.Senha
-                        
-                    );
-
-                    if(lUsuario != null)
+                    if (Utils.SenhaValida(pUsuarioDto.Login.Senha) && Utils.EmailValido(pUsuarioDto.Login.Email))
                     {
-                        var collectionName = _usuariosCollection.CollectionNamespace.CollectionName;
-                        var lUsuarioId = new SequenciasBusiness(_mongoDb).ProximoValor(collectionName);
+                        var lUsuario = new Usuarios
+                        (
+                            pUsuarioDto.Nome,
+                            pUsuarioDto.Sobrenome,
+                            pUsuarioDto.Login.Email,
+                            pUsuarioDto.Login.Senha,
+                            "user"
 
-                        lUsuario.UsuarioId = lUsuarioId;
+                        );
 
-                        _documentosBusiness.Salvar(pUsuarioDto.Documento, lUsuario);
-                        _enderecosBusiness.Salvar(pUsuarioDto.Endereco, lUsuario);
-                        _telefonesBusiness.Salvar(pUsuarioDto.Telefone, lUsuario);
-
-                        var documento = _documentosBusiness.DocumentoPorId(lUsuario.UsuarioId);
-                        var endereco = _enderecosBusiness.EnderecoPorId(lUsuario.UsuarioId);
-                        var telefone = _telefonesBusiness.TelefonePorId(lUsuario.UsuarioId);
-
-                        if(documento != null && endereco != null && telefone != null)
+                        if (lUsuario != null)
                         {
-                            lUsuario.Documento = documento;
-                            lUsuario.Endereco = endereco;
-                            lUsuario.Telefone = telefone;
+                            var collectionName = _usuariosCollection.CollectionNamespace.CollectionName;
+                            var lUsuarioId = new SequenciasBusiness(_mongoDb).ProximoValor(collectionName);
 
-                            _usuariosCollection.InsertOne(lUsuario);
+                            lUsuario.UsuarioId = lUsuarioId;
+
+                            _documentosBusiness.Salvar(pUsuarioDto.Documento, lUsuario);
+                            _enderecosBusiness.Salvar(pUsuarioDto.Endereco, lUsuario);
+                            _telefonesBusiness.Salvar(pUsuarioDto.Telefone, lUsuario);
+
+                            var documento = _documentosBusiness.DocumentoPorId(lUsuario.UsuarioId);
+                            var endereco = _enderecosBusiness.EnderecoPorId(lUsuario.UsuarioId);
+                            var telefone = _telefonesBusiness.TelefonePorId(lUsuario.UsuarioId);
+
+                            if (documento != null && endereco != null && telefone != null)
+                            {
+                                lUsuario.Documento = documento;
+                                lUsuario.Endereco = endereco;
+                                lUsuario.Telefone = telefone;
+
+                                _usuariosCollection.InsertOne(lUsuario);
+                            }
+                            else
+                            {
+                                _documentosBusiness.DeletarDocumento(lUsuario.UsuarioId);
+                                _enderecosBusiness.DeletarEndereco(lUsuario.UsuarioId);
+                                _telefonesBusiness.DeletarTelefone(lUsuario);
+
+                                throw new Exception("Não foi possivel finalizar a operação");
+                            }
                         }
                         else
                         {
-                            _documentosBusiness.DeletarDocumento(lUsuario.UsuarioId);
-                            _enderecosBusiness.DeletarEndereco(lUsuario.UsuarioId);
-                            _telefonesBusiness.DeletarTelefone(lUsuario);
-
-                            throw new Exception("Não foi possivel finalizar a operação");
+                            throw new Exception("Erro ao cadastrar usuário");
                         }
                     }
                     else
                     {
-                       throw new Exception("Erro ao cadastrar usuário");
+                        throw new Exception("Formato de email ou senha invalidos");
                     }
+
                 }
                 else
                 {
-                    throw new Exception("Formato de email ou senha invalidos");
+                    throw new Exception("Senhas não se coincidem");
                 }
-
-            }
-            else
-            {
-                throw new Exception("Senhas não se coincidem");
             }
         }
 
@@ -104,28 +114,24 @@ namespace ApiDoCesao.Data.Business
             return _usuariosCollection.Find(Builders<Usuarios>.Filter.Eq(usr => usr.UsuarioId, pId)).FirstOrDefault();
         }
 
+        public Usuarios UsuarioPorEmail(string pEmail)
+        {
+            return _usuariosCollection.Find(Builders<Usuarios>.Filter.Eq(usr => usr.Email, pEmail)).FirstOrDefault();
+        }
+
         public void AlterarUsuario(int pId, UsuarioDto pUsuario)
         {
-            var BdUsuario = _usuariosCollection.Find(
-                    Builders<Usuarios>.Filter.Eq(usr => usr.UsuarioId, pId)
-                ).FirstOrDefault();
+            var BdUsuario = UsuarioPorId(pId);
 
-            if (pUsuario.Senha == pUsuario.SenhaConfirmacao && BdUsuario != null)
+            if (pUsuario.Login.Senha == pUsuario.SenhaConfirmacao && BdUsuario != null)
             {
-                if (Utils.SenhaValida(pUsuario.Senha) && Utils.EmailValido(pUsuario.Email)) 
+                if (Utils.SenhaValida(pUsuario.Login.Senha) && Utils.EmailValido(pUsuario.Login.Email)) 
                 {
-
                     try
                     {
-                        var usuarioParaSerAlterado = _usuariosCollection.Find(
-                        Builders<Usuarios>.Filter.Eq(usr => usr.UsuarioId, pId)
-                            ).FirstOrDefault();
-
-                        var documentoMudado =_documentosBusiness.AlterarDocumento(usuarioParaSerAlterado.UsuarioId, pUsuario.Documento, usuarioParaSerAlterado);
-                        var enderecoMudado = _enderecosBusiness.AlterarEndereco(usuarioParaSerAlterado.Endereco.UsuarioId, pUsuario.Endereco, usuarioParaSerAlterado);
-                        var telefoneMudado = _telefonesBusiness.AlterarTelefone(usuarioParaSerAlterado.UsuarioId, pUsuario.Telefone);
-
-
+                        var documentoMudado =_documentosBusiness.AlterarDocumento(BdUsuario.UsuarioId, pUsuario.Documento, BdUsuario);
+                        var enderecoMudado = _enderecosBusiness.AlterarEndereco(BdUsuario.Endereco.UsuarioId, pUsuario.Endereco, BdUsuario);
+                        var telefoneMudado = _telefonesBusiness.AlterarTelefone(BdUsuario.UsuarioId, pUsuario.Telefone);
 
                         _usuariosCollection.FindOneAndUpdate(
                             Builders<Usuarios>.Filter.Eq(usr => usr.UsuarioId, pId),
@@ -133,8 +139,8 @@ namespace ApiDoCesao.Data.Business
                                 .Set(usr => usr.UsuarioId, pId)
                                 .Set(usr => usr.Nome, pUsuario.Nome)
                                 .Set(usr => usr.Sobrenome, pUsuario.Sobrenome)
-                                .Set(usr => usr.Senha, pUsuario.Senha)
-                                .Set(usr => usr.Email, pUsuario.Email)
+                                .Set(usr => usr.Senha, pUsuario.Login.Senha)
+                                .Set(usr => usr.Email, pUsuario.Login.Email)
                                 .Set(usr =>usr.Documento, documentoMudado)
                                 .Set(usr=>usr.Endereco,enderecoMudado)
                                 .Set(usr => usr.Telefone, telefoneMudado)
@@ -146,6 +152,19 @@ namespace ApiDoCesao.Data.Business
                     }
                 }
             }
+        }
+
+        public void AtualizarCarrinho(Usuarios pUsuario)
+        {
+            try
+            {
+                _usuariosCollection.UpdateOne(Builders<Usuarios>.Filter.Eq(usr => usr.UsuarioId, pUsuario.UsuarioId), Builders<Usuarios>.Update.Set(usr => usr.CarrinhoDeCompras, pUsuario.CarrinhoDeCompras));
+            }
+            catch
+            {
+                throw new Exception("Não foi possivel atualizar o carrinho"); 
+            }
+            
         }
 
         public void DeletarUsuario(int pId)

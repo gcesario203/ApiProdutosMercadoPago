@@ -9,8 +9,7 @@ namespace ApiDoCesao.Models
     {
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
-        public string Email { get; set; }
-        public string Senha { get; set; }
+        public AuthDto Login { get; set; }
         public string SenhaConfirmacao { get; set; }
         public TelefoneDto Telefone { get; set; }
         public DocumentoDto Documento { get; set; }

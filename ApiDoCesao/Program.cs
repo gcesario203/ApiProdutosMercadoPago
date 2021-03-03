@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApiDoCesao.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -13,6 +14,7 @@ namespace ApiDoCesao
     {
         public static void Main(string[] args)
         {
+            MercadoPago.SDK.AccessToken = Settings.AccessToken;
             CreateHostBuilder(args).Build().Run();
         }
 

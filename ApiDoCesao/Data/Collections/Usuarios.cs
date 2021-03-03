@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System.Collections.Generic;
 
 namespace ApiDoCesao.Data.Collections
 {
@@ -9,33 +10,25 @@ namespace ApiDoCesao.Data.Collections
         public string Sobrenome { get; set; }
         public string Email { get;set; }
         public string Senha { get; set; }
+        public string Funcao { get; set; }
         public Documentos Documento { get; set; }
         public Enderecos Endereco { get; set; }
         public Telefones Telefone { get; set; }
-
-        public ICollection<Produtos> Produtos { get; set; } = new List<Produtos>();
+        public List<Produtos> CarrinhoDeCompras { get; set; } = new List<Produtos>();
 
         public Usuarios(
             string nome,
             string sobrenome,
             string email,
-            string senha
+            string senha,
+            string funcao
           )
         {
             Nome = nome;
             Sobrenome = sobrenome;
             Email = email;
             Senha = senha;
-        }
-
-        public void AddProduto(Produtos pProduto)
-        {
-            Produtos.Add(pProduto);
-        }
-
-        public void RemoveProduto(Produtos pProduto)
-        {
-            Produtos.Remove(pProduto);
+            Funcao = funcao;
         }
     }
 }

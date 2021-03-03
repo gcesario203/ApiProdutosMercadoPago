@@ -1,6 +1,7 @@
 ﻿using ApiDoCesao.Data;
 using ApiDoCesao.Data.Business;
 using ApiDoCesao.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -20,6 +21,7 @@ namespace ApiDoCesao.Controllers
 
 
         [HttpPost]
+        [Authorize]
         public IActionResult SalvarProduto([FromBody] ProdutoDto pProduto)
         {
             try
@@ -35,6 +37,7 @@ namespace ApiDoCesao.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult TodosProdutos()
         {
             try
@@ -48,6 +51,7 @@ namespace ApiDoCesao.Controllers
         }
 
         [HttpGet("{pId}")]
+        [Authorize]
         public IActionResult ProdutoPorId(int pId)
         {
             var produtoSelecionado = _produtosCollection.ProdutoPorId(pId);
@@ -64,6 +68,7 @@ namespace ApiDoCesao.Controllers
 
 
         [HttpPut("{pId}")]
+        [Authorize]
         public IActionResult AlterarProduto(int pId, [FromBody] ProdutoDto pProduto)
         {
             var produtoAlterado = _produtosCollection.AlterarProduto(pId, pProduto);
@@ -79,6 +84,7 @@ namespace ApiDoCesao.Controllers
         }
 
         [HttpDelete("{pId}")]
+        [Authorize]
         public IActionResult DeletarProduto(int pId)
         {
             try
