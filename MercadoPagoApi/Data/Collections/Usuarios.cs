@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 
-namespace ApiDoCesao.Data.Collections
+namespace MercadoPagoApi.Data.Collections
 {
     public class Usuarios
     {

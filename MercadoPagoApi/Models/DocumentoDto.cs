@@ -1,4 +1,4 @@
-﻿namespace ApiDoCesao.Models
+﻿namespace MercadoPagoApi.Models
 {
     public class DocumentoDto
     {

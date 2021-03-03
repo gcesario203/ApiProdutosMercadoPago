@@ -1,4 +1,4 @@
-﻿namespace ApiDoCesao.Data
+﻿namespace MercadoPagoApi.Data
 {
     public static class Settings
     {

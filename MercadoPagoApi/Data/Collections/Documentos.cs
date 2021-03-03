@@ -1,4 +1,4 @@
-﻿namespace ApiDoCesao.Data.Collections
+﻿namespace MercadoPagoApi.Data.Collections
 {
     public class Documentos
     {

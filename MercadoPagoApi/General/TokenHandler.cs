@@ -1,5 +1,5 @@
-﻿using ApiDoCesao.Data;
-using ApiDoCesao.Data.Collections;
+﻿using MercadoPagoApi.Data;
+using MercadoPagoApi.Data.Collections;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
@@ -7,7 +7,7 @@ using System.Security.Claims;
 using System.Text;
 
 
-namespace ApiDoCesao.General
+namespace MercadoPagoApi.General
 {
     public static class TokenHandler
     {

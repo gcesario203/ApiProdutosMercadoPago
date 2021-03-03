@@ -1,7 +1,7 @@
-﻿using ApiDoCesao.Data.Collections;
+﻿using MercadoPagoApi.Data.Collections;
 using MongoDB.Driver;
 
-namespace ApiDoCesao.Data.Business
+namespace MercadoPagoApi.Data.Business
 {
     public class SequenciasBusiness
     {

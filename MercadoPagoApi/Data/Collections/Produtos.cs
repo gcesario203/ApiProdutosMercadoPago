@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ApiDoCesao.Data.Collections
+namespace MercadoPagoApi.Data.Collections
 {
     public class Produtos
     {

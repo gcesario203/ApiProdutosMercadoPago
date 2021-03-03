@@ -1,4 +1,4 @@
-﻿namespace ApiDoCesao.Enums
+﻿namespace MercadoPagoApi.Enums
 {
     public static class TipoDocumento
     {

@@ -3,10 +3,10 @@ using Microsoft.Extensions.Configuration;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using MongoDB.Bson.Serialization.Conventions;
-using ApiDoCesao.Data.Collections;
-using ApiDoCesao.General;
+using MercadoPagoApi.Data.Collections;
+using MercadoPagoApi.General;
 
-namespace ApiDoCesao.Data
+namespace MercadoPagoApi.Data
 {
     public class MongoDb
     {

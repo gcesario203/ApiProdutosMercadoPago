@@ -1,11 +1,11 @@
-﻿using ApiDoCesao.Data.Collections;
-using ApiDoCesao.General;
-using ApiDoCesao.Models;
+﻿using MercadoPagoApi.Data.Collections;
+using MercadoPagoApi.General;
+using MercadoPagoApi.Models;
 using MongoDB.Driver;
 using System;
 using System.Linq;
 
-namespace ApiDoCesao.Data.Business
+namespace MercadoPagoApi.Data.Business
 {
     public class DocumentosBusiness
     {

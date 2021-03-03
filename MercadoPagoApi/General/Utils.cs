@@ -1,11 +1,11 @@
-﻿using ApiDoCesao.Data.Collections;
-using ApiDoCesao.Enums;
+﻿using MercadoPagoApi.Data.Collections;
+using MercadoPagoApi.Enums;
 using MercadoPago.DataStructures.Preference;
 using MongoDB.Bson.Serialization;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 
-namespace ApiDoCesao.General
+namespace MercadoPagoApi.General
 {
     public static class Utils
     {

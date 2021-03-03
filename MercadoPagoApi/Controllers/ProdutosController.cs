@@ -1,11 +1,11 @@
-﻿using ApiDoCesao.Data;
-using ApiDoCesao.Data.Business;
-using ApiDoCesao.Models;
+﻿using MercadoPagoApi.Data;
+using MercadoPagoApi.Data.Business;
+using MercadoPagoApi.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace ApiDoCesao.Controllers
+namespace MercadoPagoApi.Controllers
 {
     [Route("produtos")]
     [ApiController]

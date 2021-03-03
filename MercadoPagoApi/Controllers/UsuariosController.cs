@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ApiDoCesao.Data;
-using ApiDoCesao.Data.Business;
-using ApiDoCesao.Models;
+using MercadoPagoApi.Data;
+using MercadoPagoApi.Data.Business;
+using MercadoPagoApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MercadoPago;
 using Microsoft.AspNetCore.Authorization;
 
-namespace ApiDoCesao.Controllers
+namespace MercadoPagoApi.Controllers
 {
     [Route("usuarios")]
     [ApiController]

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ApiDoCesao.Data.Collections;
-using ApiDoCesao.General;
+using MercadoPagoApi.Data.Collections;
+using MercadoPagoApi.General;
 using MercadoPago;
 using MercadoPago.Resources;
 
-namespace ApiDoCesao.Data.Business
+namespace MercadoPagoApi.Data.Business
 {
     public class ComprasBusiness
     {

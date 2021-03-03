@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "ApiDoCesao": {
+    "MercadoPagoApi": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
